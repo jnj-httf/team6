@@ -8,6 +8,18 @@
 
     <link rel="stylesheet" th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}" /></script>
+    <script type="text/javascript" th:src="@{/js/jquery.mask.js}" /></script>
+    <script type="text/javascript" th:src="@{/js/jquery.maskedinput.js}" /></script>
+
+<!--    <script>
+
+        $(document).ready(function() {
+            $("#latitude").mask('-00.00000000');
+            alert('teste');
+        });
+    </script>-->
 </head>
 
 <body>
@@ -22,17 +34,23 @@
 
         <div>
             <form method="post" th:action="@{/}" th:object="${distance}" >
-                <input type="text" th:field="*{lat}" />
-                <input type="text" th:field="*{lng}" />
+                <input type="text" th:field="*{lat}" id="latitude" />
+                <input type="text" th:field="*{lng}" id="longitude"/>
                 <input type="submit" />
             </form>
+        </div>
+        <div>
+            <th:block th:if="${maisProxima != null}" th:text="${maisProxima.getNomEstab()}"></th:block>
         </div>
     </div>
 </main>
 
+<<<<<<< Updated upstream
 <script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
 <script type="text/javascript" th:src="@{webjars/jquery/3.3.1-2/jquery.min.js}" /></script>
 <script type="text/javascript" th:src="@{/js/jquery.mask.min.js}" /></script>
+=======
+>>>>>>> Stashed changes
 
 </body>
 </html>
