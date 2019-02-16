@@ -6,8 +6,14 @@
 
     <title>UBS Mais Próxima</title>
 
-    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <!-- <link rel="stylesheet" th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/ubssearch.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js" />
+    <script type="text/javascript" th:src="@{/js/jquery.mask.min.js}" />
+
 </head>
 
 <body>
@@ -15,24 +21,52 @@
 <main role="main" class="container">
 
     <div class="starter-template">
-        <h1>Cálculo de distância</h1>
-        <h2>
-            <span th:text="'Hello, ' + ${message}"></span>
-        </h2>
 
-        <div>
+        <div class="container">
+            <h1>Busca Pela UBS mais Próxima</h1>
+            <p>Selecione a forma de busca, informando dados que você possui e que pode melhor lhe ajudar!</p>
+
             <form method="post" th:action="@{/distancia}" th:object="${distance}" >
-                <input type="text" th:field="*{lat}" />
-                <input type="text" th:field="*{lng}" />
+
+                <div class="container">
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Busca Informando a Cidade</a>
+                                </h4>
+                            </div>
+                            <div id="collapse1" class="panel-collapse collapse in">
+                                <div class="panel-body"><p> Infome a Cidade: <input type="text" /> </p>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Busca Informando posição geográfica</a>
+                                </h4>
+                            </div>
+                            <div id="collapse2" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <p>Latitute: </p><input type="text" th:field="*{lat}" />
+                                    <br>
+                                    <p>Longitude: </p><input type="text" th:field="*{lng}" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <br>
                 <input type="submit" />
             </form>
         </div>
+
     </div>
 </main>
-
-<script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
-<script type="text/javascript" th:src="@{webjars/jquery/3.3.1-2/jquery.min.js}" /></script>
-<script type="text/javascript" th:src="@{/js/jquery.mask.min.js}" /></script>
 
 </body>
 </html>
