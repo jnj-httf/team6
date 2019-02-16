@@ -21,7 +21,7 @@
         </h2>
 
         <div>
-            <form method="post" th:action="@{/distancia}" th:object="${distance}" >
+            <form method="post" th:action="@{/}" th:object="${distance}" >
                 <input type="text" th:field="*{lat}" />
                 <input type="text" th:field="*{lng}" />
                 <input type="submit" />
