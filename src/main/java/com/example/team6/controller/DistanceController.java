@@ -1,7 +1,9 @@
 package com.example.team6.controller;
 
+import com.example.team6.model.Cidade;
 import com.example.team6.model.Distance;
 import com.example.team6.repository.CidadeRepository;
+import com.example.team6.util.DistanceCalculatorUtil;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,8 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.example.team6.model.Cidade;
-import com.example.team6.util.DistanceCalculatorUtil;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Log
 @RequestMapping("/")
@@ -35,22 +39,21 @@ public class DistanceController
     {
         model.addAttribute("message", "Oi");
         log.info(distance.toString());
-        double dist = 0;
-        Cidade maisProxima = null;
-        for (Cidade c : cidadeRepository.findAll()) {
-            if (dist==0){
-                maisProxima = c;
-                dist = DistanceCalculatorUtil.distance(Double.parseDouble(distance.getLat()),Double.parseDouble(distance.getLng()), Double.parseDouble(c.getVlrLatitude()), Double.parseDouble(c.getVlrLongitude()));
-            }else{
-                if (dist > DistanceCalculatorUtil.distance(Double.parseDouble(distance.getLat()),Double.parseDouble(distance.getLng()), Double.parseDouble(c.getVlrLatitude()), Double.parseDouble(c.getVlrLongitude()))){
-                    dist = DistanceCalculatorUtil.distance(Double.parseDouble(distance.getLat()),Double.parseDouble(distance.getLng()), Double.parseDouble(c.getVlrLatitude()), Double.parseDouble(c.getVlrLongitude()));
-                    maisProxima = c;
-                }
-            }
-        }
 
+        List<Cidade> cidadeList = cidadeRepository.findAll().stream()
+            .map(cidade ->
+            {
+                Double lat1 = Double.valueOf(cidade.getVlrLatitude());
+                Double lng1 = Double.valueOf(cidade.getVlrLongitude());
+                Double lat2 = Double.valueOf(distance.getLat());
+                Double lng2 = Double.valueOf(distance.getLng());
+                cidade.setDistanceFrom(DistanceCalculatorUtil.distance(lat1, lng1, lat2, lng2));
+                return cidade;
+            })
+            .sorted(Comparator.comparing(Cidade::getDistanceFrom))
+            .collect(Collectors.toList());
 
-        model.addAttribute("maisProxima", maisProxima);
+        model.addAttribute("ubs", cidadeList.subList(0, 3));
         return "distance/distance";
     }
 }
