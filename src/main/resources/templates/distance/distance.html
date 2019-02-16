@@ -10,9 +10,6 @@
     <link rel="stylesheet" th:href="@{/css/main.css}"/> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" th:href="@{/css/ubssearch.css}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js" ></script>
-    <script type="text/javascript" th:src="@{/js/jquery.mask.min.js}" ></script>
 
 </head>
 
@@ -21,6 +18,10 @@
 <main role="main" class="container">
 
     <div class="starter-template">
+        <h1>Cálculo de distância</h1>
+        <h2>
+            <span th:text="'Hello, ' + ${message}"></span>
+        </h2>
 
         <div class="container">
             <h1>Busca Pela UBS mais Próxima</h1>
@@ -67,6 +68,10 @@
 
     </div>
 </main>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js" ></script>
+<script type="text/javascript" th:src="@{/js/jquery.mask.min.js}" ></script>
 
 </body>
 </html>
